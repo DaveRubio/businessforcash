@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dean's Drive-In BusinessForCash</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+    }
+
+    /* Mobile menu styles */
+    .mobile-menu {
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .mobile-menu.open {
+      transform: translateX(0);
+    }
+
+    /* Fix Swiper overflow on mobile */
+    .swiper {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    /* Modal styles */
+    .modal {
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .modal.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      transform: translateY(-20px);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .modal.open .modal-content {
+      transform: translateY(0);
+    }
+  </style>
+  <!-- SwiperJS CDN - Only needed for main image carousel -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+  <!-- HEADER -->
+  <header class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+      <div class="flex items-center justify-between w-full md:w-auto">
+        <h1 class="text-xl sm:text-2xl font-bold text-blue-700">
+          Business<span class="text-gray-900">ForCash</span>
+        </h1>
+        <!-- Mobile menu button -->
+        <button class="md:hidden text-gray-600 p-1" id="mobileMenuButton">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+
+      <nav class="hidden md:flex space-x-6 lg:space-x-8 text-sm font-medium">
+        <a href="#" class="text-gray-600 hover:text-blue-700">Home</a>
+        <a href="#" class="text-gray-600 hover:text-blue-700">Buy</a>
+        <a href="#" class="text-gray-600 hover:text-blue-700">Sell</a>
+        <a href="#" class="text-gray-600 hover:text-blue-700">Resources</a>
+        <a href="#" class="text-gray-600 hover:text-blue-700">Contact</a>
+      </nav>
+      <button class="hidden md:block bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 text-sm font-medium">
+        List Your Business
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu fixed inset-0 bg-white z-50 md:hidden p-6" id="mobileMenu">
+      <div class="flex justify-between items-center mb-8">
+        <h1 class="text-xl font-bold text-blue-700">
+          Business<span class="text-gray-900">ForCash</span>
+        </h1>
+        <button class="text-gray-600 p-1" id="closeMobileMenu">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <nav class="space-y-6 text-lg font-medium">
+        <a href="#" class="block text-gray-600 hover:text-blue-700 py-2">Home</a>
+        <a href="#" class="block text-gray-600 hover:text-blue-700 py-2">Buy</a>
+        <a href="#" class="block text-gray-600 hover:text-blue-700 py-2">Sell</a>
+        <a href="#" class="block text-gray-600 hover:text-blue-700 py-2">Resources</a>
+        <a href="#" class="block text-gray-600 hover:text-blue-700 py-2">Contact</a>
+      </nav>
+      <button class="w-full mt-8 bg-blue-700 text-white px-4 py-3 rounded-lg hover:bg-blue-800 font-medium">
+        List Your Business
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="bg-gradient-to-b from-blue-50 to-white py-8 md:py-16">
+    <div class="max-w-5xl mx-auto text-center px-4">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 px-2">
+        Dean's Drive-In Step Back in Time & Savor the Flavor
+      </h2>
+      <p class="text-gray-600 max-w-2xl mx-auto text-base px-4">
+        An iconic local diner with a loyal customer base, nostalgic charm, and
+        consistent cash flow. Established, profitable, and ready for its next
+        chapter.
+      </p>
+    </div>
+  </section>
+
+  <!-- MAIN - PROPER MOBILE RESPONSIVE LAYOUT -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 md:py-12">
+    <!-- MOBILE: Contact form first -->
+    <div class="block lg:hidden mb-6">
+      <!-- Contact Seller Now Button Card for Mobile -->
+      <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg p-5 text-white mb-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-lg font-semibold mb-1">Ready to Make an Offer?</h3>
+            <p class="text-blue-100 text-sm">Connect directly with the seller</p>
+          </div>
+          <button id="contactSellerMobile"
+            class="bg-white text-blue-700 hover:bg-blue-50 font-semibold py-2 px-4 rounded-lg transition-colors">
+            Contact Seller Now
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 items-start">
+      <!-- LEFT COLUMN - CONTENT -->
+      <div class="lg:col-span-2 space-y-6 md:space-y-8">
+        <!-- IMAGE CAROUSEL -->
+        <div class="relative">
+          <!-- Swiper main container -->
+          <div class="swiper mySwiper rounded-xl shadow-md overflow-hidden">
+            <div class="swiper-wrapper">
+              <!-- Slides -->
+              <div class="swiper-slide">
+                <img src="./images/Slider-Resto3.jpg" alt="Restaurant 1"
+                  class="w-full h-48 sm:h-64 md:h-80 object-cover" />
+              </div>
+              <div class="swiper-slide">
+                <img src="./images/Slider-Resto4.jpg" alt="Restaurant 2"
+                  class="w-full h-48 sm:h-64 md:h-80 object-cover" />
+              </div>
+              <div class="swiper-slide">
+                <img src="./images/Slider-Resto5.jpg" alt="Restaurant 3"
+                  class="w-full h-48 sm:h-64 md:h-80 object-cover" />
+              </div>
+            </div>
+
+            <!-- Pagination and Nav -->
+            <div class="swiper-pagination !bottom-2"></div>
+            <div class="swiper-button-next !hidden sm:!flex"></div>
+            <div class="swiper-button-prev !hidden sm:!flex"></div>
+          </div>
+        </div>
+
+        <!-- MODERN STATS CARD -->
+        <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-100">
+          <div class="flex flex-col space-y-4">
+            <!-- Asking Price -->
+            <div class="text-center border-b pb-4">
+              <h3 class="text-2xl font-bold text-blue-700">$350,000</h3>
+              <p class="text-gray-600 text-sm">Asking Price</p>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-2 gap-3">
+              <div class="text-center">
+                <p class="text-xs text-gray-500 mb-1">Gross Revenue</p>
+                <p class="font-semibold text-sm">Not Disclosed</p>
+              </div>
+              <div class="text-center">
+                <p class="text-xs text-gray-500 mb-1">EBITDA</p>
+                <p class="font-semibold text-sm">Not Disclosed</p>
+              </div>
+              <div class="text-center">
+                <p class="text-xs text-gray-500 mb-1">Cash Flow (SDE)</p>
+                <p class="font-semibold text-sm">Not Disclosed</p>
+              </div>
+              <div class="text-center">
+                <p class="text-xs text-gray-500 mb-1">Real Estate</p>
+                <p class="font-semibold text-sm">Not Disclosed</p>
+              </div>
+            </div>
+
+            <!-- Established -->
+            <div class="text-center">
+              <p class="text-xs text-gray-500">Established</p>
+              <p class="font-semibold text-sm">1962</p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col space-y-3 pt-2">
+              <div class="flex flex-wrap gap-2 justify-center">
+                <button
+                  class="flex items-center gap-1 bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-lg transition-colors text-xs">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                  </svg>
+                  Save
+                </button>
+                <button
+                  class="flex items-center gap-1 bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-lg transition-colors text-xs">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                  </svg>
+                  Print
+                </button>
+                <button
+                  class="flex items-center gap-1 bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-lg transition-colors text-xs">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                  </svg>
+                  Share
+                </button>
+              </div>
+
+              <button
+                class="w-full flex items-center justify-center gap-2 bg-blue-700 hover:bg-blue-800 text-white py-3 rounded-lg font-medium text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Valuation Report
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- BUSINESS OVERVIEW -->
+        <section class="bg-white rounded-xl shadow-sm p-5 space-y-6">
+          <div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">
+              Business Overview
+            </h3>
+            <p class="text-gray-700 leading-relaxed text-base">
+              Dean's Drive-In has been a local favorite for more than 25 years,
+              serving classic comfort food in a friendly, nostalgic atmosphere.
+              The business features a fully equipped kitchen, steady walk-in
+              traffic, and a strong social media following. Situated along a
+              busy main road, this turnkey opportunity is ideal for entrepreneurs
+              seeking a profitable and well-loved establishment.
+            </p>
+          </div>
+
+          <!-- FINANCIAL HIGHLIGHTS -->
+          <div>
+            <h4 class="text-xl font-semibold mb-3 text-gray-900">
+              Financial Highlights
+            </h4>
+            <div class="grid grid-cols-1 gap-3 text-gray-800 text-base">
+              <p><span class="font-semibold">📍 Location:</span> Panabo City, Davao del Norte</p>
+              <p><span class="font-semibold">💰 Asking Price:</span> $120,000</p>
+              <p><span class="font-semibold">📈 Annual Revenue:</span> $240,000</p>
+              <p><span class="font-semibold">💵 Annual Profit:</span> $55,000</p>
+              <p><span class="font-semibold">🏠 Real Estate:</span> Leased</p>
+              <p><span class="font-semibold">👥 Employees:</span> 6</p>
+            </div>
+          </div>
+
+          <!-- GROWTH OPPORTUNITIES -->
+          <div>
+            <h4 class="text-xl font-semibold mb-3 text-gray-900">
+              Growth Opportunities
+            </h4>
+            <ul class="list-disc ml-5 text-gray-700 space-y-2 text-base">
+              <li>Introduce online ordering and delivery partnerships with GrabFood or FoodPanda.</li>
+              <li>Expand menu with specialty drinks or desserts for higher margins.</li>
+              <li>Rebrand with updated signage and outdoor seating area.</li>
+              <li>Host local events or theme nights to attract younger audiences.</li>
+            </ul>
+          </div>
+
+          <!-- REASON FOR SELLING -->
+          <div>
+            <h4 class="text-xl font-semibold mb-3 text-gray-900">
+              Reason for Selling
+            </h4>
+            <p class="text-gray-700 leading-relaxed text-base">
+              The current owner is retiring after many successful years in the
+              food industry. They are willing to provide training and transition
+              support to ensure a smooth handover to the new owner.
+            </p>
+          </div>
+
+          <!-- ASSETS INCLUDED -->
+          <div>
+            <h4 class="text-xl font-semibold mb-3 text-gray-900">
+              Assets Included in the Sale
+            </h4>
+            <ul class="list-disc ml-5 text-gray-700 space-y-2 text-base">
+              <li>Complete kitchen and cooking equipment</li>
+              <li>All furniture and fixtures</li>
+              <li>POS system and customer database</li>
+              <li>Social media pages and brand assets</li>
+            </ul>
+          </div>
+
+          <!-- CALL TO ACTION -->
+          <div class="text-center pt-4 border-t border-gray-200">
+            <button id="contactSellerMain"
+              class="w-full bg-blue-700 text-white px-6 py-3 rounded-lg hover:bg-blue-800 font-semibold text-base">
+              Contact Seller Now
+            </button>
+          </div>
+        </section>
+
+        <!-- SIMILAR BUSINESS OPPORTUNITIES - STATIC CARDS -->
+        <section class="mt-8">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6">
+            Similar Business Opportunities
+          </h3>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Card 1 -->
+            <div
+              class="bg-white shadow-sm rounded-xl overflow-hidden hover:shadow-lg transition h-full border border-gray-100">
+              <img src="./images/Resto1.jpg" class="w-full h-40 object-cover" />
+              <div class="p-4 flex flex-col h-full">
+                <h4 class="font-semibold text-lg text-gray-900">
+                  Cozy Café & Bakery
+                </h4>
+                <p class="text-gray-600 text-sm mb-3">Davao City, PH</p>
+                <p class="text-gray-700 text-sm flex-grow">
+                  A charming café known for its pastries and artisan coffee.
+                </p>
+                <div class="mt-4 flex justify-between items-center">
+                  <span class="text-blue-700 font-semibold">$95,000</span>
+                  <a href="#" class="text-sm text-blue-700 hover:underline">View Listing →</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div
+              class="bg-white shadow-sm rounded-xl overflow-hidden hover:shadow-lg transition h-full border border-gray-100">
+              <img src="./images/Resto2.jpg" class="w-full h-40 object-cover" />
+              <div class="p-4 flex flex-col h-full">
+                <h4 class="font-semibold text-lg text-gray-900">
+                  Sports Bar & Grill
+                </h4>
+                <p class="text-gray-600 text-sm mb-3">Tagum City, PH</p>
+                <p class="text-gray-700 text-sm flex-grow">
+                  High-traffic location, strong weekend crowd, turnkey setup.
+                </p>
+                <div class="mt-4 flex justify-between items-center">
+                  <span class="text-blue-700 font-semibold">$150,000</span>
+                  <a href="#" class="text-sm text-blue-700 hover:underline">View Listing →</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div
+              class="bg-white shadow-sm rounded-xl overflow-hidden hover:shadow-lg transition h-full border border-gray-100">
+              <img src="./images/Resto3.jpg" class="w-full h-40 object-cover" />
+              <div class="p-4 flex flex-col h-full">
+                <h4 class="font-semibold text-lg text-gray-900">
+                  Franchise Restaurant Opportunity
+                </h4>
+                <p class="text-gray-600 text-sm mb-3">Digos City, PH</p>
+                <p class="text-gray-700 text-sm flex-grow">
+                  Well-known brand with strong sales and franchise support.
+                </p>
+                <div class="mt-4 flex justify-between items-center">
+                  <span class="text-blue-700 font-semibold">$200,000</span>
+                  <a href="#" class="text-sm text-blue-700 hover:underline">View Listing →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- DESKTOP: Contact sidebar -->
+      <aside class="hidden lg:block bg-white rounded-xl shadow-md p-6 sticky top-24 self-start border border-gray-100">
+        <!-- Contact Seller Now Button Card for Desktop -->
+        <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg p-5 text-white mb-6">
+          <div class="text-center">
+            <h3 class="text-lg font-semibold mb-2">Interested in This Business?</h3>
+            <p class="text-blue-100 text-sm mb-4">Connect directly with the seller to discuss this opportunity</p>
+            <button id="contactSellerDesktop"
+              class="w-full bg-white text-blue-700 hover:bg-blue-50 font-semibold py-3 px-4 rounded-lg transition-colors">
+              Contact Seller Now
+            </button>
+          </div>
+        </div>
+
+        <div class="text-center text-gray-500 text-sm py-4">
+          <p>Business Listed By:</p>
+          <p class="font-medium">Not Disclosed</p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-gray-300 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-sm">
+      <div>
+        <h5 class="text-white font-semibold text-lg mb-3">BusinessForCash</h5>
+        <p class="text-gray-400 leading-relaxed">
+          Buy and sell local businesses with confidence. Trusted by hundreds of
+          small business owners across the Philippines.
+        </p>
+      </div>
+
+      <div>
+        <h5 class="text-white font-semibold text-lg mb-3">Marketplace</h5>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:text-white">Browse Listings</a></li>
+          <li><a href="#" class="hover:text-white">Sell a Business</a></li>
+          <li><a href="#" class="hover:text-white">Franchises</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="text-white font-semibold text-lg mb-3">Resources</h5>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:text-white">Buying Guide</a></li>
+          <li><a href="#" class="hover:text-white">Valuation Tips</a></li>
+          <li><a href="#" class="hover:text-white">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="text-white font-semibold text-lg mb-3">Contact</h5>
+        <p>Email: info@businessforcash.com</p>
+        <p>Phone: (555) 123-4567</p>
+      </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-4 mt-6 border-t border-gray-700 pt-6 text-center">
+      <p class="text-gray-500 text-sm">
+        © 2025 BusinessForCash — All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Contact Seller Modal -->
+  <div id="contactModal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div class="modal-content bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden">
+      <div class="bg-gradient-to-r from-blue-600 to-blue-800 p-5 text-white">
+        <div class="flex justify-between items-center">
+          <h3 class="text-xl font-semibold">Contact Seller</h3>
+          <button id="closeModal" class="text-white hover:text-blue-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <p class="text-blue-100 mt-1">Get in touch with the business owner</p>
+      </div>
+
+      <form class="p-5 space-y-4">
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+          <input type="text" id="name" placeholder="Enter your full name"
+            class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-base" />
+        </div>
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Your Email</label>
+          <input type="email" id="email" placeholder="Enter your email address"
+            class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-base" />
+        </div>
+        <div>
+          <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+          <input type="tel" id="phone" placeholder="Enter your phone number"
+            class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-base" />
+        </div>
+        <div>
+          <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Your Message</label>
+          <textarea id="message" rows="4" placeholder="Tell the seller about your interest in this business..."
+            class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-base resize-none"></textarea>
+        </div>
+        <button type="submit"
+          class="w-full bg-blue-700 text-white py-3 rounded-lg hover:bg-blue-800 font-medium text-base transition-colors">
+          Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Mobile menu functionality
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const closeMobileMenu = document.getElementById('closeMobileMenu');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+
+    closeMobileMenu.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = 'auto';
+    });
+
+    // Close mobile menu when clicking on links
+    const mobileLinks = mobileMenu.querySelectorAll('a');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = 'auto';
+      });
+    });
+
+    // Initialize main image swiper
+    const swiper = new Swiper(".mySwiper", {
+      loop: true,
+      slidesPerView: 1,
+      spaceBetween: 0,
+      centeredSlides: true,
+      autoplay: {
+        delay: 4000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+
+    // Contact Modal Functionality
+    const contactModal = document.getElementById('contactModal');
+    const closeModal = document.getElementById('closeModal');
+    const contactSellerMobile = document.getElementById('contactSellerMobile');
+    const contactSellerDesktop = document.getElementById('contactSellerDesktop');
+    const contactSellerMain = document.getElementById('contactSellerMain');
+
+    // Function to open modal
+    function openModal() {
+      contactModal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Function to close modal
+    function closeModalFunc() {
+      contactModal.classList.remove('open');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Event listeners for opening modal
+    contactSellerMobile.addEventListener('click', openModal);
+    contactSellerDesktop.addEventListener('click', openModal);
+    contactSellerMain.addEventListener('click', openModal);
+
+    // Event listener for closing modal
+    closeModal.addEventListener('click', closeModalFunc);
+
+    // Close modal when clicking outside the content
+    contactModal.addEventListener('click', (e) => {
+      if (e.target === contactModal) {
+        closeModalFunc();
+      }
+    });
+
+    // Form submission handler
+    const contactForm = contactModal.querySelector('form');
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // Here you would typically send the form data to a server
+      alert('Thank you for your interest! The seller will contact you soon.');
+      closeModalFunc();
+      contactForm.reset();
+    });
+  </script>
+</body>
+
+</html>
